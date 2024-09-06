@@ -36,6 +36,7 @@ class AuthController extends Controller
         ]);
     }
 
+    #login function for user
     public function login(Request $request)
     {
         if (!Auth::attempt($request->only('email', 'password'))) {
@@ -54,6 +55,7 @@ class AuthController extends Controller
         ]);
     }
 
+    #logout function for authenticated user
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
