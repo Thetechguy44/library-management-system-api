@@ -8,10 +8,12 @@ use App\Models\Book;
 
 class BookController extends Controller
 {
+    #This fuction returns all the books in the database with both search query by title, isnb, author or name 
     public function index(Request $request)
     {
         $query = Book::query();
 
+        #query search
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where('title', 'like', "%$search%")
@@ -25,11 +27,13 @@ class BookController extends Controller
         return response()->json($books);
     }
 
+    #This fuction return a particular book selected
     public function show(Book $book)
     {
         return response()->json($book->load('author'));
     }
 
+    #This fuction store newly added or created books in the database
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -44,6 +48,7 @@ class BookController extends Controller
         return response()->json($book, 201);
     }
 
+    #This fuction update a particular selected book
     public function update(Request $request, Book $book)
     {
         $validated = $request->validate([
@@ -58,6 +63,7 @@ class BookController extends Controller
         return response()->json($book);
     }
 
+    #This fuction deletes a selected book
     public function destroy(Book $book)
     {
         $book->delete();
@@ -66,6 +72,7 @@ class BookController extends Controller
         ], 200);
     }
 
+    #This fuction is use to borrow a book if it's available (for members only)
     public function borrow(Request $request, Book $book)
     {
         if ($book->status !== 'Available') {
@@ -84,6 +91,7 @@ class BookController extends Controller
         return response()->json($borrowRecord, 201);
     }
 
+    #This fuction return a borrowed book if it's borrowed (for members only)
     public function return(Book $book)
     {
         if ($book->status !== 'Borrowed') {
