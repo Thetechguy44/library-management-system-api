@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\BorrowRecordController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -41,7 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/users/{user}', [UserController::class, 'update'])->middleware('can:manage-users');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('can:delete-users');
 
-    // // Borrow Records
-    // Route::get('/borrow-records', [BorrowRecordController::class, 'index'])->middleware('can:view-borrow-records');
-    // Route::get('/borrow-records/{borrowRecord}', [BorrowRecordController::class, 'show'])->middleware('can:view-borrow-records');
+    // Borrow Records
+    Route::get('/borrow-records', [BorrowRecordController::class, 'index'])->middleware('can:view-borrow-records');
+    Route::get('/borrow-records/{borrowRecord}', [BorrowRecordController::class, 'show'])->middleware('can:view-borrow-records');
 });
