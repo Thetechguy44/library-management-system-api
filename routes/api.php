@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\BookController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -17,14 +18,14 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    // // Books
-    // Route::get('/books', [BookController::class, 'index']);
-    // Route::get('/books/{book}', [BookController::class, 'show']);
-    // Route::post('/books', [BookController::class, 'store'])->middleware('can:manage-books');
-    // Route::put('/books/{book}', [BookController::class, 'update'])->middleware('can:manage-books');
-    // Route::delete('/books/{book}', [BookController::class, 'destroy'])->middleware('can:delete-books');
-    // Route::post('/books/{book}/borrow', [BookController::class, 'borrow'])->middleware('can:borrow-books');
-    // Route::post('/books/{book}/return', [BookController::class, 'return'])->middleware('can:return-books');
+    // Books
+    Route::get('/books', [BookController::class, 'index']);
+    Route::get('/books/{book}', [BookController::class, 'show']);
+    Route::post('/books', [BookController::class, 'store'])->middleware('can:manage-books');
+    Route::put('/books/{book}', [BookController::class, 'update'])->middleware('can:manage-books');
+    Route::delete('/books/{book}', [BookController::class, 'destroy'])->middleware('can:delete-books');
+    Route::post('/books/{book}/borrow', [BookController::class, 'borrow'])->middleware('can:borrow-books');
+    Route::post('/books/{book}/return', [BookController::class, 'return'])->middleware('can:return-books');
 
     // Authors
     Route::get('/authors', [AuthorController::class, 'index']);
