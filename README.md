@@ -10,7 +10,6 @@ This is a RESTful API for a Library Management System built with Laravel 11.
 - Search functionality for books
 - API documentation with Swagger/OpenAPI
 - Caching for improved performance
-- Docker containerization
 
 ## Requirements
 
@@ -22,7 +21,7 @@ This is a RESTful API for a Library Management System built with Laravel 11.
 1. Clone the repository:
    ```
    git clone https://github.com/thetechguy44/library-management-system-api.git
-   cd library-management-system
+   cd library-management-system-api
    ```
 
 2. Install dependencies:
@@ -45,12 +44,12 @@ This is a RESTful API for a Library Management System built with Laravel 11.
    php artisan migrate
    ```
 
-6. (Optional) Seed the database with sample data:
+<!-- 6. (Optional) Seed the database with sample data:
    ```
    php artisan db:seed
-   ```
+   ``` -->
 
-7. Start the development server:
+6. Start the development server:
    ```
    php artisan serve
    ```
