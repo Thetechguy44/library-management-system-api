@@ -44,12 +44,12 @@ This is a RESTful API for a Library Management System built with Laravel 11.
    php artisan migrate
    ```
 
-<!-- 6. (Optional) Seed the database with sample data:
+6. (Optional) Seed the database with sample data:
    ```
    php artisan db:seed
-   ``` -->
+   ```
 
-6. Start the development server:
+7. Start the development server:
    ```
    php artisan serve
    ```
