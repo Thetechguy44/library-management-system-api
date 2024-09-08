@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 /**
  * @OA\Info(
- *    title="APIs For Thrift Store",
+ *    title="APIs For Library Managament System",
  *    version="1.0.0",
  * ),
  *   @OA\SecurityScheme(
