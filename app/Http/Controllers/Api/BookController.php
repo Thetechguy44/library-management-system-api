@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Support\Facades\Cache;
 
 class BookController extends Controller
 {
@@ -38,20 +39,25 @@ class BookController extends Controller
     #This fuction returns all the books in the database with both search query by title, isnb, author or name 
     public function index(Request $request)
     {
-        $query = Book::query();
-
-        #query search
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where('title', 'like', "%$search%")
-                  ->orWhere('isbn', 'like', "%$search%")
-                  ->orWhereHas('author', function ($q) use ($search) {
-                      $q->where('name', 'like', "%$search%");
-                  });
-        }
-
-        $books = $query->with('author')->paginate(15);
-        return response()->json($books);
+        $page = $request->get('page', 1);
+        $search = $request->get('search');
+    
+        return Cache::remember("books.page.{$page}.search.{$search}", 60*60, function () use ($request) {
+            $query = Book::query();
+    
+            if ($request->has('search')) {
+                $search = $request->input('search');
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%$search%")
+                      ->orWhere('isbn', 'like', "%$search%")
+                      ->orWhereHas('author', function ($q) use ($search) {
+                          $q->where('name', 'like', "%$search%");
+                      });
+                });
+            }
+    
+            return $query->with('author')->paginate(15);
+        });
     }
 
     /**
