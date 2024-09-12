@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\BorrowRecord;
+use App\Models\Fine;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -51,5 +52,10 @@ class User extends Authenticatable
     public function borrowRecords()
     {
         return $this->hasMany(BorrowRecord::class);
+    }
+
+    public function fine()
+    {
+        return $this->hasMany(Fine::class);
     }
 }
