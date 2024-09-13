@@ -21,26 +21,26 @@ class FineController extends Controller
         return response()->json($fine->load(['user', 'borrowRecord']));
     }
 
-    // public function calculateFine(BorrowRecord $borrowRecord)
-    // {
-    //     $dueDate = Carbon::parse($borrowRecord->due_at);
-    //     $returnDate = $borrowRecord->returned_at ? Carbon::parse($borrowRecord->returned_at) : Carbon::now();
+    public function calculateFine(BorrowRecord $borrowRecord)
+    {
+        $dueDate = Carbon::parse($borrowRecord->due_at);
+        $returnDate = $borrowRecord->returned_at ? Carbon::parse($borrowRecord->returned_at) : Carbon::now();
         
-    //     if ($returnDate->gt($dueDate)) {
-    //         $daysLate = $returnDate->diffInDays($dueDate);
-    //         $fineAmount = $daysLate * 1.00; // $1 per day late
+        if ($returnDate->gt($dueDate)) {
+            $daysLate = $returnDate->diffInDays($dueDate);
+            $fineAmount = $daysLate * 1.00; // $1 per day late
             
-    //         $fine = Fine::create([
-    //             'user_id' => $borrowRecord->user_id,
-    //             'borrow_record_id' => $borrowRecord->id,
-    //             'amount' => $fineAmount,
-    //         ]);
+            $fine = Fine::create([
+                'user_id' => $borrowRecord->user_id,
+                'borrow_record_id' => $borrowRecord->id,
+                'amount' => $fineAmount,
+            ]);
             
-    //         return response()->json($fine, 201);
-    //     }
+            return response()->json($fine, 201);
+        }
         
-    //     return response()->json(['message' => 'No fine applicable'], 200);
-    // }
+        return response()->json(['message' => 'No fine applicable'], 200);
+    }
 
     // public function payFine(Fine $fine)
     // {
