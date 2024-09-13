@@ -16,10 +16,10 @@ class FineController extends Controller
         return response()->json($fines);
     }
 
-    // public function show(Fine $fine)
-    // {
-    //     return response()->json($fine->load(['user', 'borrowRecord']));
-    // }
+    public function show(Fine $fine)
+    {
+        return response()->json($fine->load(['user', 'borrowRecord']));
+    }
 
     // public function calculateFine(BorrowRecord $borrowRecord)
     // {

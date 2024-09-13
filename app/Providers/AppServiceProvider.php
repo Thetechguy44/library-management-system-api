@@ -24,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
         // $this->registerPolicies();
 
         #Define all my gates here 
+
+        //Books
         Gate::define('manage-books', function (User $user) {
             return in_array($user->role, ['Admin', 'Librarian']);
         });
@@ -32,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
             return $user->role === 'Admin';
         });
 
+        //Record
         Gate::define('borrow-books', function (User $user) {
             return $user->role === 'Member';
         });
@@ -40,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
             return $user->role === 'Member';
         });
 
+        // Authors
         Gate::define('manage-authors', function (User $user) {
             return in_array($user->role, ['Admin', 'Librarian']);
         });
@@ -48,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
             return $user->role === 'Admin';
         });
 
+        //Users
         Gate::define('view-users', function (User $user) {
             return $user->role === 'Admin';
         });
@@ -62,6 +67,15 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::define('view-borrow-records', function (User $user) {
             return in_array($user->role, ['Admin', 'Librarian']);
+        });
+
+        //Fine
+        Gate::define('manage-fines', function (User $user) {
+            return in_array($user->role, ['Admin', 'Librarian']);
+        });
+        
+        Gate::define('pay-fines', function (User $user) {
+            return $user->role === 'Member';
         });
     }
 }

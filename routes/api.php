@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\BorrowRecordController;
+use App\Http\Controllers\Api\FineController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -45,4 +46,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // Borrow Records
     Route::get('/borrow-records', [BorrowRecordController::class, 'index'])->middleware('can:view-borrow-records');
     Route::get('/borrow-records/{borrowRecord}', [BorrowRecordController::class, 'show'])->middleware('can:view-borrow-records');
+
+    //fine
+    Route::get('/fines', [FineController::class, 'index'])->middleware('can:manage-fines');
+    Route::get('/fines/{fine}', [FineController::class, 'show'])->middleware('can:manage-fines');
+    // Route::post('/borrow-records/{borrowRecord}/calculate-fine', [FineController::class, 'calculateFine'])->middleware('can:manage-fines');
+    // Route::post('/fines/{fine}/pay', [FineController::class, 'payFine'])->middleware('can:pay-fines');
 });
