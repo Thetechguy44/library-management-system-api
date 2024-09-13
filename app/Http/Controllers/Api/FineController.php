@@ -42,11 +42,11 @@ class FineController extends Controller
         return response()->json(['message' => 'No fine applicable'], 200);
     }
 
-    // public function payFine(Fine $fine)
-    // {
-    //     $fine->paid = true;
-    //     $fine->save();
+    public function payFine(Fine $fine)
+    {
+        $fine->paid = true;
+        $fine->save();
         
-    //     return response()->json($fine);
-    // }
+        return response()->json($fine);
+    }
 }
