@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Author;
 use App\Models\BorrowRecord;
+use App\Models\Reservation;
 
 class Book extends Model
 {
@@ -27,6 +28,11 @@ class Book extends Model
     public function borrowRecords()
     {
         return $this->hasMany(BorrowRecord::class);
+    }
+
+    public function reservation()
+    {
+        return $this->hasMany(Reservation::class);
     }
 
 }

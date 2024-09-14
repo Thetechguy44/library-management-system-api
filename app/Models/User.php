@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\BorrowRecord;
 use App\Models\Fine;
+use App\Models\Reservation;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -57,5 +58,10 @@ class User extends Authenticatable
     public function fine()
     {
         return $this->hasMany(Fine::class);
+    }
+
+    public function reservation()
+    {
+        return $this->hasMany(Reservation::class);
     }
 }
