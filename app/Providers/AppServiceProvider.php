@@ -77,5 +77,10 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('pay-fines', function (User $user) {
             return $user->role === 'Member';
         });
+
+        //reservation
+        Gate::define('manage-reservations', function (User $user) {
+            return in_array($user->role, ['Admin', 'Librarian']);
+        });
     }
 }

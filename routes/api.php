@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\BorrowRecordController;
 use App\Http\Controllers\Api\FineController;
+use App\Http\Controllers\Api\ReservationController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -52,4 +53,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/fines/{fine}', [FineController::class, 'show'])->middleware('can:manage-fines');
     Route::post('/borrow-records/{borrowRecord}/calculate-fine', [FineController::class, 'calculateFine'])->middleware('can:manage-fines');
     Route::post('/fines/{fine}/pay', [FineController::class, 'payFine'])->middleware('can:pay-fines');
+
+    //reservation
+    Route::apiResource('reservations', ReservationController::class);
 });
