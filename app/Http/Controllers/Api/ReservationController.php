@@ -31,7 +31,9 @@ class ReservationController extends Controller
         $book = Book::findOrFail($validated['book_id']);
 
         if ($book->status !== 'Available') {
-            return response()->json(['message' => 'Book is not available for reservation'], 400);
+            return response()->json([
+                'message' => 'Book is not available for reservation'
+            ], 400);
         }
 
         $reservation = Reservation::create([
@@ -42,5 +44,22 @@ class ReservationController extends Controller
         ]);
 
         return response()->json($reservation, 201);
+    }
+
+    public function update(Request $request, Reservation $reservation)
+    {
+        $validated = $request->validate([
+            'status' => 'required|in:Confirmed,Cancelled',
+        ]);
+
+        $reservation->update($validated);
+
+        if ($validated['status'] === 'Confirmed') {
+            $reservation->book->update(['status' => 'Borrowed']);
+        } elseif ($validated['status'] === 'Cancelled') {
+            $reservation->book->update(['status' => 'Available']);
+        }
+
+        return response()->json($reservation);
     }
 }
