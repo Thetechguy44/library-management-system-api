@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\BorrowRecordController;
 use App\Http\Controllers\Api\FineController;
 use App\Http\Controllers\Api\ReservationController;
+use App\Http\Controllers\Api\RecommendationController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -56,4 +57,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //reservation
     Route::apiResource('reservations', ReservationController::class);
+
+    //recommendation
+    Route::get('/recommendations', [RecommendationController::class, 'getRecommendations']);
 });
