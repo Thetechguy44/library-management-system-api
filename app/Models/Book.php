@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Author;
 use App\Models\BorrowRecord;
 use App\Models\Reservation;
+use App\Models\Review;
 
 class Book extends Model
 {
@@ -35,4 +36,8 @@ class Book extends Model
         return $this->hasOne(Reservation::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
