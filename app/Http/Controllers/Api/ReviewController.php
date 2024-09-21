@@ -14,4 +14,20 @@ class ReviewController extends Controller
         $reviews = $book->reviews()->with('user')->paginate(15);
         return response()->json($reviews);
     }
+
+    public function store(Request $request, Book $book)
+    {
+        $validated = $request->validate([
+            'comment' => 'required|string',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        $review = $book->reviews()->create([
+            'user_id'=>$request->user()->id,
+            'comment'=>$validated['comment'],
+            'rating'=>$validated['rating'],
+        ]);
+
+        return response()->json($review, 201);
+    }
 }
