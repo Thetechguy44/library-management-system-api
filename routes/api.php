@@ -66,4 +66,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/books/{book}/reviews', [ReviewController::class, 'index']);
     Route::post('/books/{book}/reviews', [ReviewController::class, 'store']);
     Route::put('/review/{review}', [ReviewController::class, 'update']);
+    Route::delete('/review/{review}', [ReviewController::class, 'destroy']);
 });

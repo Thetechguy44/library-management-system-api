@@ -39,7 +39,14 @@ class ReviewController extends Controller
         ]);
 
         $review->update($validated);
-        
+
         return response()->json($review);
+    }
+
+    public function destroy(Review $review)
+    {
+        $review->delete();
+
+        return response()->json(null, 204);
     }
 }
