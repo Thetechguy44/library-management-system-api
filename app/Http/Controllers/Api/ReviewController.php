@@ -30,4 +30,16 @@ class ReviewController extends Controller
 
         return response()->json($review, 201);
     }
+
+    public function update(Request $request, Review $review)
+    {
+        $validated = $request->validate([
+            'comment' => 'required|string',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        $review->update($validated);
+        
+        return response()->json($review);
+    }
 }

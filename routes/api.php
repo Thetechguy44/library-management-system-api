@@ -63,5 +63,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/recommendations', [RecommendationController::class, 'getRecommendations']);
 
     //reviews
-    Route::get('/reviews', [ReviewController::class, 'index']);
+    Route::get('/books/{book}/reviews', [ReviewController::class, 'index']);
+    Route::post('/books/{book}/reviews', [ReviewController::class, 'store']);
+    Route::put('/review/{review}', [ReviewController::class, 'update']);
 });
