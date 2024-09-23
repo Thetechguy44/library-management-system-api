@@ -8,8 +8,12 @@ This is a RESTful API for a Library Management System built with Laravel 11.
 - Book borrowing and returning functionality
 - Role-based access control (Admin, Librarian, Member)
 - Search functionality for books
+- Advanced search functionality (e.g., search by author or title)
 - API documentation with Swagger/OpenAPI
 - Caching for improved performance
+- Book reviews and ratings.
+- Book reservations.
+- Fine management.
 
 ## Requirements
 
