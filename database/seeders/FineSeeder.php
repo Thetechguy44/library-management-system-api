@@ -16,7 +16,7 @@ class FineSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::all();
+        $users = User::where('role', 'Member')->get();
         $borrowRecords = BorrowRecord::all();
 
         if ($users->isEmpty() || $borrowRecords->isEmpty()) {
