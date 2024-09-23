@@ -54,7 +54,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/fines', [FineController::class, 'index'])->middleware('can:manage-fines');
     Route::get('/fines/{fine}', [FineController::class, 'show'])->middleware('can:manage-fines');
     Route::post('/borrow-records/{borrowRecord}/calculate-fine', [FineController::class, 'calculateFine'])->middleware('can:manage-fines');
-    Route::post('/fines/{fine}/pay', [FineController::class, 'payFine'])->middleware('can:pay-fines');
+    Route::patch('/fines/{fine}/pay', [FineController::class, 'payFine'])->middleware('can:pay-fines');
 
     //reservation
     Route::apiResource('reservations', ReservationController::class);
