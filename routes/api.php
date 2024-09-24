@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/books', [BookController::class, 'index']);
     Route::get('/books/{book}', [BookController::class, 'show']);
     Route::post('/books', [BookController::class, 'store'])->middleware('can:manage-books');
-    Route::put('/books/{book}', [BookController::class, 'update'])->middleware('can:manage-books');
+    Route::patch('/books/{book}', [BookController::class, 'update'])->middleware('can:manage-books');
     Route::delete('/books/{book}', [BookController::class, 'destroy'])->middleware('can:delete-books');
     Route::post('/books/{book}/borrow', [BookController::class, 'borrow'])->middleware('can:borrow-books');
     Route::post('/books/{book}/return', [BookController::class, 'return'])->middleware('can:return-books');
@@ -43,7 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->middleware('can:view-users');
     Route::get('/users/{user}', [UserController::class, 'show'])->middleware('can:view-users');
     Route::post('/users', [UserController::class, 'store'])->middleware('can:manage-users');
-    Route::put('/users/{user}', [UserController::class, 'update'])->middleware('can:manage-users');
+    Route::patch('/users/{user}', [UserController::class, 'update'])->middleware('can:manage-users');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('can:delete-users');
 
     // Borrow Records
@@ -65,6 +65,6 @@ Route::middleware('auth:sanctum')->group(function () {
     //reviews
     Route::get('/books/{book}/reviews', [ReviewController::class, 'index']);
     Route::post('/books/{book}/reviews', [ReviewController::class, 'store']);
-    Route::put('/review/{review}', [ReviewController::class, 'update']);
-    Route::delete('/review/{review}', [ReviewController::class, 'destroy']);
+    Route::patch('/reviews/{review}', [ReviewController::class, 'update']);
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy']);
 });
