@@ -115,6 +115,11 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
+            // Check if the authenticated user is the owner of the review
+        if ($request->user()->id !== $review->user_id) {
+            return response()->json(['message' => 'Forbidden'], 403); // Return 403 if not authorized
+        }
+
         $validated = $request->validate([
             'comment' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
